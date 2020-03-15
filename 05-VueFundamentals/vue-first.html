@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h1>Education</h1>    
+  <div id="app">
+      My university: {{ abbr() }}
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        university: 'CUE Krakow!'
+      },
+      methods: {
+        abbr: function () {
+          return this.university.substring(0,3);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h1>Higher Education</h1>    
+  <div id="app">
+    <div>
+        My university: {{ university }}
+    </div>
+    <h3>List of Students</h3>
+    <ul>
+      <li v-for="item in students">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        university: 'CUE Krakow!',
+        students: ['Piotr','Adam','Olga','Marek','Kinga']
+      }
+    });
+  </script>
+
+</body>
+</html>
