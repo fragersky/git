@@ -1,26 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Shopping List</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 </head>
 
 <body>
     <h1>Shopping List</h1>
     <p>
-        New item: <input type="text" name="item">
-        <button type="button">Add</button>
+        New item:
+        <input type="text" name="item" placeholder="New item..." />
+        <button id="add-button" type="button">Add</button>
     </p>
     <h3>List of items</h3>
-    <ol>
+    <ol id="shopping-list">
         <li>cooking oil</li>
         <li>breakfast cereal</li>
         <li>bread</li>
     </ol>
 
+    
     <script>
-    	// a JavaScript code here ...
+        $(document).ready(function () {
+            const $input = $('input[name="item"]');
+            const $list = $('#shopping-list');
+
+            $('#add-button').click(function () {
+                const $item = $(`<li>${$input.val()}</li>`);
+                $list.append($item);
+                $input.val('');
+            });
+
+            $('ol').on('dblclick', 'li', function () {
+                $(this).remove();
+            });
+        });
 
     </script>
 </body>

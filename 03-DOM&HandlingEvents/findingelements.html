@@ -1,19 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finding elements</title>
 </head>
 
 <body>
-    <h1>Finding elements in DOM</h1>
-    <p id="someTest">Find an element by element id</p>
-    <p class="important">Find elements by class name</p>
-    <p>Find elements by tag name</p>
 
-    <script>
-        // a JavaScript code here ...
+    <body>
+        <h1>Finding elements in DOM</h1>
+        <p id="someTest">Find an element by element id</p>
+        <p class="important">Find elements by class name</p>
+        <p>Find elements by tag name</p>
+        <script>
+            console.log(document.getElementsByTagName('h1')[0].innerHTML, ' - h1 element');
 
-    </script>
-</body>
+            console.log(
+                document.getElementById('someTest').innerHTML,
+                ' - element with "someText" id'
+            );
+
+            console.log(
+                document.getElementsByClassName('important')[0].innerHTML,
+                ' - element with "important" class'
+            );
+
+            const elByTagCollection = document.getElementsByTagName('p');
+
+            for (item of elByTagCollection) {
+                console.log(item.innerHTML, ' - "p" element');
+            }
+
+            // Nice way
+            [...document.getElementsByTagName('p')].map(el => {
+                console.log(el.innerHTML, ' - "p" element');
+            });
+
+        </script>
+    </body>
 
 </html>

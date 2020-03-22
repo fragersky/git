@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Text translation</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h3 onmouseover="textPL(this)">Sticks and stones may break my bones, but words will never harm me.</h3>
-		<script>
-			function textPL(element){
-				element.innerHTML = "Kije i kamienie kości mi połamią, ale twoje słowa nigdy mnie nie zranią"
-			}
-		</script>
-	</body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text translation</title>
+</head>
+
+<body>
+    <h3 onmouseover="translatePl(this)" onmouseout="translateAng(this)">
+        Sticks and stones may break my bones, but words will never harm me.
+    </h3>
+    <!-- <script src="translate.js"></script> -->
+    <script>
+        const textPl =
+            'Kije i kamienie kości mi połamią, ale twoje słowa nigdy mnie nie zranią';
+        const textAng =
+            'Sticks and stones may break my bones, but words will never harm me.';
+
+        const translatePl = element => {
+            element.innerHTML = textPl;
+        };
+
+        const translateAng = element => {
+            element.innerHTML = textAng;
+        };
+
+    </script>
+</body>
+
 </html>

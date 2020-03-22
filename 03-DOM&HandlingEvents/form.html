@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Fill in a form</title>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fill in a form</title>
 </head>
 
 <body>
-	<h1>Filling in a form</h1>
-	<form>
-		<p>University:<br><input type="text"></p>
-		<p>Address:<br><input type="text"></p>
-		<button type="button">Hint</button>
-	</form>
+    <h1>Filling in a form</h1>
+    <form>
+        <p>University:<br /><input name="uni" type="text" /></p>
+        <p>Address:<br /><input name="address" type="text" /></p>
+        <button type="button" onclick="showHint()">Hint</button>
+    </form>
+    <script>
+        const uni = 'Cracow University of Economics';
+        const address = 'Rakowicka 27, Krakow, POLAND';
 
-	<script>
-		// a JavaScript code here ...
-		var university = "Cracow University of Economics";
-		var address = "Rakowicka 27, Krakow, POLAND";
+        const uniInput = document.querySelector('input[name="uni"]');
+        const addressInput = document.querySelector('input[name="address"]');
 
-	</script>
+        const showHint = () => {
+            uniInput.value = uni;
+            addressInput.value = address;
+        };
+
+    </script>
 </body>
 
 </html>

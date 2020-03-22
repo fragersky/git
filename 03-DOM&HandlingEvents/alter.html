@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<title>Pink Floyd</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script> 
 		<meta charset="UTF-8">
 	</head>
-	<body>
+	<body ondblclick="changeBgColor()">
 		<h1>Another Brick in the Wall</h1>
 		<h3>Pink Floyd</h3>
-		<p>We don't need no education<br>
+		<p id="myP" oncopy="copyrightWarn()">We don't need no education<br>
 		We don't need no thought control<br>
 		No dark sarcasm in the classroom<br>
 		Teachers leave them kids alone<br>
@@ -15,13 +16,49 @@
 		All in all it's just another brick in the wall<br>
 		All in all you're just another brick in the wall</p>
 		
-		<p style="visibility: hidden;">Pink Floyd were an English rock band formed in London.<br>
+		<p id="widz" style="visibility: hidden;" onclick="showBandImg(this)">Pink Floyd were an English rock band formed in London.<br>
 		They achieved international acclaim with their progressive<br>
 		and psychedelic music.</p>
 		
 		<script>
-			// a JavaScript code here ...
-			
+jQuery(document).ready(function () {
+    $('h1').on('click',
+    function () {
+        $('h1').append(' Part 2');
+    }
+    );
+});
+jQuery(document).ready(function () {
+	$("h3").on('click',
+        function () {
+			document.getElementById("widz").style.visibility = "visible";
+		}
+	);
+});
+
+jQuery(document).ready(function () {
+			$("#myP").on('click',
+        	function () {
+				document.getElementById("myP").style.fontStyle = "italic";
+        }
+    );
+});
+
+//Strzałkowa funkcja const 'nazwa funkcji' = ()
+const changeBgColor = () => {
+            document.getElementsByTagName('body')[0].style.background = 'yellow';
+		};
+		
+const copyrightWarn = () => {
+    window.alert('Nope');
+};
+
+const showBandImg = element => {
+            const img = document.createElement('img');
+            img.src =
+                'https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg';
+            element.appendChild(img);
+        };
 		</script>
 	</body>
 </html>
