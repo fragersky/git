@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ready States</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <h1>Chart</h1>
+    <input type="button" value="Get chart with 10 latest gold quotations" onclick="render()">
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        function render() {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () { display(this); };
+            xhr.open('GET', 'http://api.nbp.pl/api/cenyzlota/last/10/?format=json');
+            xhr.send();
+        }
+        function display(r) {
+            if (r.status === 200 && r.readyState === 4) {
+                const data = JSON.parse(r.response);
+                var labels = []
+                var prices = []
+                data.forEach(element => {
+                    labels.push(element.data)
+                    prices.push(element.cena)
+                    })
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Last 10 gold price quotations',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: prices
+                        }]
+                    },
+
+                        // Configuration options go here
+                        options: {}
+                });
+            }
+        };
+    </script>
+
+</body>
+
+</html>
+

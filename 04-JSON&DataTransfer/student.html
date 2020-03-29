@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Student</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>Student</h1>
-		<p>Open a console and then click the button</p>
-		<input type="button" value="Display student's data">
-		<p id="personalData"></p>
 
-		<script>
+<head>
+    <title>Ready States</title>
+    <meta charset="UTF-8">
+</head>
 
-		</script>
+<body>
+    <h1>Student</h1>
+    <p>Open a console and then click the button</p>
+    <input type="button" value="Display student's data" onclick="connect()">
+    <p id="personalData"></p>
 
-	</body>
+    <script>
+        function connect() {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () { display(this); };
+            xhr.open('GET', 'https://gist.githubusercontent.com/fragersky/a383fd3f01edcf5bdb4e8dd17afc4fa4/raw/783eba9d3d1037a86314c20d24a214cad104ebd2/student.json');
+            xhr.send();
+        }
+        function display(r) {
+            if (r.status === 200 && r.readyState === 4) {
+				const data = JSON.parse(r.response);
+                console.log("Request state:", r.readyState);
+                console.log("Status:", r.status);
+				console.log("Status text:", r.statusText);
+				const output = `Student name is ${data['name']} and surname is ${data['surname']}`
+				document.getElementById("personalData").innerHTML = data.name + ", " + data.surname;
+				console.log(output)
+				console.log("-----");
+            }
+        };
+    </script>
+
+</body>
+
 </html>

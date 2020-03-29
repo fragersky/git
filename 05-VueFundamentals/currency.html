@@ -1,0 +1,40 @@
+<div id ="app">
+   <table id="app" border="2">
+    <thead>
+      <tr>
+        <th v-for="col in columns">{{col}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="row in currencies">
+        <td v-for="col in columns">{{row[col]}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script src ="https://unpkg.com/vue"></script>
+<script>
+  const app = new Vue({
+      el: '#app',
+      data: {
+          currencies: []
+      },
+      computed: {
+        "columns": function columns() {
+          if (this.currencies.length == 0) {
+          return [];
+        }
+        return Object.keys(this.currencies[0])
+       }
+      },
+      created(){
+          fetch('http://api.nbp.pl/api/exchangerates/tables/a/?format=json')
+          .then(response => response.json())
+          .then(json =>{
+              this.currencies = json[0].rates
+          })
+      },
+  })
+</script>

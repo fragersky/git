@@ -4,6 +4,18 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <table id="app" border="2">
+    <thead>
+      <tr>
+        <th v-for="col in columns">{{col}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="row in films">
+        <td v-for="col in columns">{{row[col]}}</td>
+      </tr>
+    </tbody>
+  </table>
   <script>
     var app = new Vue({
       el: '#app',
@@ -34,8 +46,15 @@
             budget: 6000000
           }
         ] 
+      },
+      computed: {
+      "columns": function columns() {
+        if (this.films.length == 0) {
+          return [];
         }
+        return Object.keys(this.films[0])
       }
+  }
     });
   </script>
 </body>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    Student's grades: 
+      <span v-for="item in grades">
+        {{item}}
+      </span>
+      <span ><br>
+        Average: {{average}}
+      </span>
+  </div>
+  <script>
+   
+    var app = new Vue({
+      el: '#app',
+      data: {
+        grades:[
+          '4',
+          '5',
+          '3',
+          '2',
+          '3',
+          '5',
+          '5',
+          '2',
+          '4']  
+      },
+      computed: {
+        average() {
+              var sum = 0 ;
+              const grades = this.grades
+              for (let index = 0; index < grades.length; index++) {
+                const element = grades[index];
+                sum = sum + parseInt(element)
+              }
+              return (sum/grades.length).toFixed(2);
+        }
+      } 
+    });
+  
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Personel Information</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>Listed people:</h1>
+    <input type="button" value="Get them in here!" onclick="load()">    
+
+    <ol id="expandthis"></ol>
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <td>LP.</td>
+                <td>Imie</td>
+                <td>Nazwisko</td>
+                <td>Kraj</td>
+            </tr>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>    
+        </thead>
+    </table>
+    <script>
+        function load() {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () { display(this); };
+            xhr.open('GET', 'https://gist.githubusercontent.com/fragersky/1375dc8d7d1e32b20d2e905f7db97031/raw/60c5b3aefea8bc8e0d1c9ef79fa8e6b7a9b1c696/people.json');
+            xhr.send();
+        }
+        function display(r) {
+            var table = document.getElementById("myTable"); //assign table to table variable
+            if (r.status === 200 && r.readyState === 4) {
+                data = JSON.parse(r.responseText)    
+                for (i = 0; i < Object.keys(data).length; i++) {
+                    var row = table.insertRow(i+1);   //insert new row
+                    var tabs = document.createElement("li"); 
+
+                    var x = row.insertCell(0);   //insert new cell
+                    x.innerHTML = data[i].country; //set text to name
+
+                    var x = row.insertCell(0);   //insert new cell
+                    x.innerHTML = data[i].surname.toUpperCase(); //set text to name
+
+                    var x = row.insertCell(0);   //insert new cell
+                    x.innerHTML = data[i].name; //set text to name
+
+                    var x = row.insertCell(0);   //insert new cell
+                    x.innerHTML = i+1; //set text to LP
+
+                    tabs.textContent = data[i].name + " " + data[i].surname.toUpperCase() + ", " + data[i].country;
+                    document.getElementById("expandthis").appendChild(tabs);
+                   }
+                }
+            }
+            
+    </script>
+
+</body>
+
+</html>

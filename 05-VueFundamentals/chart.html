@@ -2,8 +2,14 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
+  <div id="app">
+    {{prepData}}
+  </div>
+  
+  <canvas id="myChart" width="400" height="400"></canvas>
   <script>
     var app = new Vue({
       el: '#app',
@@ -30,7 +36,33 @@
             popularity: 7.37
           }
         ] 
-      }
+      },
+      computed:{
+        prepData(){
+          var labels = []
+          var popu = []
+          this.films.forEach(element => {
+            labels.push(element.language)
+            popu.push(element.popularity)
+          })
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var chart = new Chart(ctx, {
+              // The type of chart we want to create
+              type: 'line',
+
+              // The data for our dataset
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'Last 10 gold price quotations',
+                      backgroundColor: 'rgb(255, 99, 132)',
+                      borderColor: 'rgb(255, 99, 132)',
+                      data: popu
+                  }]
+              }
+          });
+        }
+      }  
     });
   </script>
 </body>

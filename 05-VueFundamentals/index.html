@@ -1,0 +1,31 @@
+<div id ="app">
+    <ul>
+        <li v-for="currency in  currencies">
+            {{currency}}
+        </li>
+    </ul>
+</div>
+
+<script src ="https://unpkg.com/vue"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            currencies: []
+        },
+        computed: {
+            totalProducts(){
+                return this.products.reduce((sum, product) => {
+                    return sum + product.quantity
+                }, 0)
+            }
+        },
+        created(){
+            fetch('http://api.nbp.pl/api/exchangerates/tables/a/?format=json')
+            .then(response => response.json())
+            .then(json =>{
+                this.currencies = json[0].rates
+            })
+        },
+    })
+</script>

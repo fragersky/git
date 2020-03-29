@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Przykład użycia frameworku DataTables</title>
+     <meta charset="UTF-8" />
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+
+</head>
+
+<body>
+    <h1>Listed people:</h1>
+    <table id="myTable" class="display" width="100%">
+    <script>
+        var source = "https://gist.githubusercontent.com/fragersky/1375dc8d7d1e32b20d2e905f7db97031/raw/60c5b3aefea8bc8e0d1c9ef79fa8e6b7a9b1c696/people.json"
+        $(document).ready(function(){
+            $.getJSON(source, data =>{
+                $("#myTable").DataTable({
+                    data: data,
+                    columns: [{
+                        data: "name"
+                    }, {
+                        data: "surname"
+                    }, {
+                        data: "country"
+                    }, {
+                        data: "email"
+                    }]
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
